@@ -13,7 +13,6 @@ const ICONS = document.querySelectorAll('.tomato');
 const CIRCLE = document.getElementById('circle');
 const ALARM_1 = new Audio('audio/end-break.mp3');
 const ALARM_2 = new Audio('audio/start-break.mp3');
-const ALARM_3 = new Audio('audio/end-break.mp3');
 let pomsComplete = 0;
 let timerLength = 0;
 let percent = 0;
@@ -32,27 +31,26 @@ function startTimer() {
     CLOCK.innerHTML = `${POM_TIME.minutes}:${POM_TIME.seconds}`;
     document.title = `${POM_TIME.minutes}:${POM_TIME.seconds}`;
     updateProgressBar(POM_TIME.total);
-    console.log(POM_TIME);
 
     // When timer hits zero
     // I think I can simplify this
     if (POM_TIME.total == 0) {
-      
+
       if (pomsComplete < 4 && onBreak === false) {
         pomsComplete += 1;
         ALARM_2.play();
         ICON.setAttribute('src', 'img/tomato-allpurp.svg');
         CIRCLE.style.stroke = '#E7DFDD';
         onBreak = true;
-      
+
       } else if (pomsComplete < 4 && onBreak === true) {
         ALARM_1.play();
         CIRCLE.style.removeProperty('stroke');
         onBreak = false;
-      
-      } else if (pomsComplete === 4) { 
+
+      } else if (pomsComplete === 4) {
         pomsComplete += 1;
-        ALARM_3.play();
+        ALARM_2.play();
         CIRCLE.style.removeProperty('stroke');
         onBreak = false;
         ICONS.forEach(el => {
@@ -94,9 +92,6 @@ function startTimer() {
         SHORT_SLIDER.disabled = false;
         LONG_SLIDER.disabled = false;
         onBreak = false;
-        // ICONS.forEach(el => {
-        //   el.setAttribute('src', 'img/tomato-purp.svg');
-        // });
       }
     }
   }
@@ -124,13 +119,12 @@ function startTimer() {
       CIRCLE.style.strokeDasharray = `${percent} 550`;
     }
     if (timeLeft == 0) {
-      percent = 0; // This needs to go someone else...?
+      percent = 0;
       CIRCLE.style.transition = 'all 0s linear';
       CIRCLE.style.strokeDasharray = '0 550';
     }
   }
 
-  // CIRCLE.style.transition = 'all 1s linear';
   CIRCLE.style.removeProperty('transition');
   updateClock();
   pomTimer = setInterval(updateClock, 1000);
