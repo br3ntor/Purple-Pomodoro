@@ -59,7 +59,7 @@ function startTimer() {
       }
     }
 
-    // One second after timer hits
+    // One second after timer hits 0
     if (POM_TIME.total < 0) {
       clearInterval(pomTimer);
 
@@ -97,7 +97,7 @@ function startTimer() {
   }
 
   function timer() {
-    // Gets seconds remaining by: subtracting the time elapsed since start from the set duration
+    // Gets seconds remaining by subtracting the time elapsed since start from the set duration.
     const TIME_LEFT = timerLength - Math.floor((Date.now() - START) / 1000);
     let minutes = Math.floor(TIME_LEFT / 60);
     let seconds = Math.floor(TIME_LEFT % 60);
@@ -166,6 +166,7 @@ RESET_TIMER.addEventListener('click', () => {
   pomsComplete = 0;
   timerLength = 0;
   CIRCLE.style.strokeDasharray = '0 550';
+  CIRCLE.style.removeProperty('stroke');
   POM_SLIDER.disabled = false;
   SHORT_SLIDER.disabled = false;
   LONG_SLIDER.disabled = false;
