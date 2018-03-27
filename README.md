@@ -6,7 +6,7 @@ Pomodoro timer for Free Code Camp.
 ### Dev To Do:
     - Update CSS for moz and ms for input styling
     - Clean up JS a bit, maybe I can be more descriptive with my variable and function names
-    - 
+    - More responsive CSS maybe, consistency with CSS size units px, rem, etc.
 
 ### Dev Brainstorm:
     - Maybe an auto-play toggle so you have to start each new pom manually.
