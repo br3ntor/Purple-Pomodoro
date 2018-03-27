@@ -13,6 +13,7 @@ const ICONS = document.querySelectorAll('.tomato');
 const CIRCLE = document.getElementById('circle');
 const ALARM_1 = new Audio('audio/end-break.mp3');
 const ALARM_2 = new Audio('audio/start-break.mp3');
+const ALARM_3 = new Audio('audio/four-complete.mp3');
 let pomsComplete = 0;
 let timerLength = 0;
 let percent = 0;
@@ -50,7 +51,7 @@ function startTimer() {
 
       } else if (pomsComplete === 4) {
         pomsComplete += 1;
-        ALARM_2.play();
+        ALARM_3.play();
         CIRCLE.style.removeProperty('stroke');
         onBreak = false;
         ICONS.forEach(el => {
