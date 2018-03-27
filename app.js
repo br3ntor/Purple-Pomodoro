@@ -32,6 +32,7 @@ function startTimer() {
     CLOCK.innerHTML = `${POM_TIME.minutes}:${POM_TIME.seconds}`;
     document.title = `${POM_TIME.minutes}:${POM_TIME.seconds}`;
     updateProgressBar(POM_TIME.total);
+    // console.log(POM_TIME);
 
     // When timer hits zero
     // I think I can simplify this
@@ -103,6 +104,7 @@ function startTimer() {
     let minutes = Math.floor(TIME_LEFT / 60);
     let seconds = Math.floor(TIME_LEFT % 60);
 
+    console.log(timerLength, (Date.now() - START) / 1000, TIME_LEFT);
     minutes = minutes < 10 ? '0' + minutes : minutes;
     seconds = seconds < 10 ? '0' + seconds : seconds;
 
