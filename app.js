@@ -104,7 +104,8 @@ function startTimer() {
     let minutes = Math.floor(TIME_LEFT / 60);
     let seconds = Math.floor(TIME_LEFT % 60);
 
-    console.log(timerLength, (Date.now() - START) / 1000, TIME_LEFT);
+    // console.log(timerLength, (Date.now() - START) / 1000, TIME_LEFT);
+    console.log((Date.now() - START) / 1000);
     minutes = minutes < 10 ? '0' + minutes : minutes;
     seconds = seconds < 10 ? '0' + seconds : seconds;
 

@@ -37,6 +37,9 @@ button:hover {
 button:active {
     background-color: #2c2042;
 }
+button:focus {
+    outline: none;
+}
 
 header {
     text-align: center;
