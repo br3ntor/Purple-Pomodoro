@@ -24,9 +24,11 @@ let pomTimer;
 
 function startTimer() {
   const START = Date.now();
+  let secondTick = 0;
 
-  function updateClock() {
-    const POM_TIME = timer();
+  function updateClock(remaining) {
+    // const POM_TIME = timer();
+    const POM_TIME = remaining;
     const ICON = document.querySelector(`.tomato:nth-child(${pomsComplete + 1})`);
 
     // This segment will tick down to 0 before logic below runs
@@ -101,20 +103,31 @@ function startTimer() {
 
   function timer() {
     // Gets seconds remaining by subtracting the time elapsed since start from the set duration.
-    const TIME_LEFT = timerLength - Math.floor((Date.now() - START) / 1000);
+    const ELAPSED_TIME = (Date.now() - START) / 1000;
+    const TIME_LEFT = timerLength - Math.floor(ELAPSED_TIME);
     let minutes = Math.floor(TIME_LEFT / 60);
     let seconds = Math.floor(TIME_LEFT % 60);
 
     // console.log(timerLength, (Date.now() - START) / 1000, TIME_LEFT);
-    console.log((Date.now() - START) / 1000);
+    // console.log((Date.now() - START) / 1000);
     minutes = minutes < 10 ? '0' + minutes : minutes;
     seconds = seconds < 10 ? '0' + seconds : seconds;
+    console.log(ELAPSED_TIME);
 
-    return {
-      'total': TIME_LEFT,
-      'minutes': minutes,
-      'seconds': seconds
-    };
+    if (Math.floor(ELAPSED_TIME) > secondTick) {
+      // console.log((Date.now() - START) / 1000);
+      secondTick += 1;
+      console.log(`${minutes} : ${seconds}`);
+      updateClock({ 'total': TIME_LEFT, 'minutes': minutes, 'seconds': seconds });
+    } else if (ELAPSED_TIME < 0.100) {
+      updateClock({ 'total': TIME_LEFT, 'minutes': minutes, 'seconds': seconds });
+    }
+
+    // return {
+    //   'total': TIME_LEFT,
+    //   'minutes': minutes,
+    //   'seconds': seconds
+    // };
   }
 
   // Transition duration is 1sec so I need to factor that in somehow...which now it is!
@@ -131,11 +144,11 @@ function startTimer() {
   }
 
   CIRCLE.style.removeProperty('transition');
-  updateClock();
+  timer();
   // Making the update interval faster would make the timer more accurate but
   // I have other functionality based off the 1 second interval besides just the timer.
   // I would have to ... rethink some things.
-  pomTimer = setInterval(updateClock, 1000);
+  pomTimer = setInterval(timer, 100);
 }
 
 
@@ -148,7 +161,7 @@ START_TIMER.addEventListener('click', () => {
     CIRCLE.style.strokeDasharray = '0 550';
     timerRunning = true;
     percent = 0;
-    BUTTON_SFX.play();    
+    BUTTON_SFX.play();
 
     if (onBreak === false) {
       timerLength = POM_SLIDER.value * 60;
