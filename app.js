@@ -14,6 +14,7 @@ const CIRCLE = document.getElementById('circle');
 const ALARM_1 = new Audio('audio/end-break.mp3');
 const ALARM_2 = new Audio('audio/start-break.mp3');
 const ALARM_3 = new Audio('audio/four-complete.mp3');
+const BUTTON_SFX = new Audio('audio/click.mp3');
 let pomsComplete = 0;
 let timerLength = 0;
 let percent = 0;
@@ -116,7 +117,7 @@ function startTimer() {
     };
   }
 
-  // Transition duration is 1sec so I need to factor that in somehow
+  // Transition duration is 1sec so I need to factor that in somehow...which now it is!
   function updateProgressBar(timeLeft) {
     if (timeLeft > 0) {
       percent += (550 / timerLength);
@@ -131,6 +132,9 @@ function startTimer() {
 
   CIRCLE.style.removeProperty('transition');
   updateClock();
+  // Making the update interval faster would make the timer more accurate but
+  // I have other functionality based off the 1 second interval besides just the timer.
+  // I would have to ... rethink some things.
   pomTimer = setInterval(updateClock, 1000);
 }
 
@@ -144,6 +148,7 @@ START_TIMER.addEventListener('click', () => {
     CIRCLE.style.strokeDasharray = '0 550';
     timerRunning = true;
     percent = 0;
+    BUTTON_SFX.play();    
 
     if (onBreak === false) {
       timerLength = POM_SLIDER.value * 60;
@@ -161,6 +166,7 @@ STOP_TIMER.addEventListener('click', () => {
     POM_SLIDER.disabled = false;
     SHORT_SLIDER.disabled = false;
     LONG_SLIDER.disabled = false;
+    BUTTON_SFX.play();
   }
 });
 RESET_TIMER.addEventListener('click', () => {
@@ -181,6 +187,7 @@ RESET_TIMER.addEventListener('click', () => {
   SHORT_LENGTH.innerHTML = '5';
   LONG_LENGTH.innerHTML = '20';
   CLOCK.innerHTML = `00:00`;
+  BUTTON_SFX.play();
   ICONS.forEach(el => {
     el.setAttribute('src', 'img/tomato-purp.svg');
   });
