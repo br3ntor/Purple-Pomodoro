@@ -27,7 +27,6 @@ function startTimer() {
   let secondTick = 0;
 
   function updateClock(remaining) {
-    // const POM_TIME = timer();
     const POM_TIME = remaining;
     const ICON = document.querySelector(`.tomato:nth-child(${pomsComplete + 1})`);
 
@@ -35,10 +34,8 @@ function startTimer() {
     CLOCK.innerHTML = `${POM_TIME.minutes}:${POM_TIME.seconds}`;
     document.title = `${POM_TIME.minutes}:${POM_TIME.seconds}`;
     updateProgressBar(POM_TIME.total);
-    // console.log(POM_TIME);
 
     // When timer hits zero
-    // I think I can simplify this
     if (POM_TIME.total == 0) {
 
       if (pomsComplete < 4 && onBreak === false) {
@@ -108,26 +105,18 @@ function startTimer() {
     let minutes = Math.floor(TIME_LEFT / 60);
     let seconds = Math.floor(TIME_LEFT % 60);
 
-    // console.log(timerLength, (Date.now() - START) / 1000, TIME_LEFT);
-    // console.log((Date.now() - START) / 1000);
     minutes = minutes < 10 ? '0' + minutes : minutes;
     seconds = seconds < 10 ? '0' + seconds : seconds;
     console.log(ELAPSED_TIME);
 
     if (Math.floor(ELAPSED_TIME) > secondTick) {
-      // console.log((Date.now() - START) / 1000);
       secondTick += 1;
       console.log(`${minutes} : ${seconds}`);
       updateClock({ 'total': TIME_LEFT, 'minutes': minutes, 'seconds': seconds });
     } else if (ELAPSED_TIME < 0.100) {
+      console.log(`${minutes} : ${seconds}`);
       updateClock({ 'total': TIME_LEFT, 'minutes': minutes, 'seconds': seconds });
     }
-
-    // return {
-    //   'total': TIME_LEFT,
-    //   'minutes': minutes,
-    //   'seconds': seconds
-    // };
   }
 
   // Transition duration is 1sec so I need to factor that in somehow...which now it is!
@@ -145,9 +134,6 @@ function startTimer() {
 
   CIRCLE.style.removeProperty('transition');
   timer();
-  // Making the update interval faster would make the timer more accurate but
-  // I have other functionality based off the 1 second interval besides just the timer.
-  // I would have to ... rethink some things.
   pomTimer = setInterval(timer, 100);
 }
 
