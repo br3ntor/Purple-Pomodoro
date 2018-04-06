@@ -1,3 +1,6 @@
+// The timer function now updates every 100ms for accuracy
+// and every second tick the updateClock function is called
+//
 // All caps const convention is kinda weird
 const CLOCK = document.getElementById('clock');
 const START_TIMER = document.getElementById('startTime');
@@ -133,7 +136,7 @@ function startTimer() {
   }
 
   CIRCLE.style.removeProperty('transition');
-  timer();
+  timer();  
   pomTimer = setInterval(timer, 100);
 }
 
