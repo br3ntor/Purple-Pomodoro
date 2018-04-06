@@ -49,6 +49,18 @@ p {
     font-size: 18px;
 }
 
+footer {
+    text-align: center;
+}
+
+footer img {
+    opacity: 0.3;
+}
+
+footer img:hover {
+    opacity: 0.5;
+}
+
 #controls {
     text-align: center;
 }

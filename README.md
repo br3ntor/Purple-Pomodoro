@@ -11,3 +11,7 @@ Pomodoro timer for Free Code Camp.
 ### Dev Brainstorm:
     - Maybe an auto-play toggle so you have to start each new pom manually.
     - Is the order of the sounds good? Or should I switch them?
+
+---
+## betterTimer Branch
+This is an attempt to make the timer a bit more accurate.
