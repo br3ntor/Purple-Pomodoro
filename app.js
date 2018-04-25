@@ -136,7 +136,7 @@ function startTimer() {
   }
 
   CIRCLE.style.removeProperty('transition');
-  timer();  
+  timer();
   pomTimer = setInterval(timer, 100);
 }
 
@@ -189,6 +189,7 @@ RESET_TIMER.addEventListener('click', () => {
   SHORT_LENGTH.innerHTML = '5';
   LONG_LENGTH.innerHTML = '20';
   CLOCK.innerHTML = `00:00`;
+  document.title = '00:00';
   BUTTON_SFX.play();
   ICONS.forEach(el => {
     el.setAttribute('src', 'img/tomato-purp.svg');
